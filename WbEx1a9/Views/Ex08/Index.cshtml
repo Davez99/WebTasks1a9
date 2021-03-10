@@ -1,0 +1,126 @@
+﻿@model WbEx1a9.Models.Ex08ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<h1>Exercicio 8</h1>
+<br />
+<h3>Solução Console</h3>
+<hr />
+    <pre id="demo" style="display:none">
+        <code>
+            using System;
+            using System.IO;
+
+            namespace Exercicio8
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        /*
+                        Ex 8 Desenvolva um algoritmo que solicite a entrada de nome, e-mail, telefone e RG
+                        de um determinado usuário e grave em um arquivo de texto.
+                        Exiba as informações na tela a partir do arquivo de texto gerado.
+                        */
+
+                        Console.WriteLine("Digite seu nome:");
+                        var nome = Console.ReadLine();
+
+                        Console.WriteLine("Digite seu e-mail:");
+                        var email = Console.ReadLine();
+
+                        Console.WriteLine("Digite seu RG:");
+                        var rg = Console.ReadLine();
+                        Console.Clear();
+
+                        StreamWriter maquinaDeEscrever = new StreamWriter("exercicio 8.txt");
+
+                        maquinaDeEscrever.WriteLine(nome);
+                        maquinaDeEscrever.WriteLine(email);
+                        maquinaDeEscrever.WriteLine(rg);
+                        maquinaDeEscrever.Close();
+
+                        Console.WriteLine("Foi gerado o arquivo .txt");
+
+                        string dados = "";
+                        StreamReader mostrarNaTela = new StreamReader("exercicio 8.txt");
+
+                        while ((dados = mostrarNaTela.ReadLine()) != null)
+                        {
+                            Console.WriteLine(dados);
+                        }
+
+
+                        Console.ReadKey();
+                    }
+                }
+            }
+        </code>
+    </pre>
+<div>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='block'"> Mostrar Código </button>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='none'"> Esconder Código </button>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<h3>Solução Web</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReceberNome" class="control-label"></label>
+                <input asp-for="ReceberNome" class="form-control" />
+                <span asp-validation-for="ReceberNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceberEmail" class="control-label"></label>
+                <input asp-for="ReceberEmail" class="form-control" />
+                <span asp-validation-for="ReceberEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceberRG" class="control-label"></label>
+                <input asp-for="ReceberRG" class="form-control" />
+                <span asp-validation-for="ReceberRG" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResponderAoUser" class="control-label"></label>
+                <input asp-for="ResponderAoUser" class="form-control" disabled />
+                <span asp-validation-for="ResponderAoUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MostrarAoUser" class="control-label"></label>
+                <textarea asp-for="MostrarAoUser" class="form-control" disabled></textarea>
+                <span asp-validation-for="MostrarAoUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<br />
+<br />
+<br />
+<br />

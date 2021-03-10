@@ -1,0 +1,120 @@
+﻿@model WbEx1a9.Models.Ex04ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<h1>Exercicio 4</h1>
+<br />
+<h3>Solução Console</h3>
+<hr />
+    <pre id="demo" style="display:none">
+        <code>
+            using System;
+
+            namespace Exercício4
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        /*
+                        4 – Desenvolva um algoritmo que solicite a entrada da idade de um determinado usuário,
+                        se for menor que 18 anos exiba na cor vermelha “Sem permissão”,
+                        caso seja maior ou igual a 18 anos exiba na cor verde “Permissão concedida”.
+                        */
+                        try {
+                            Console.WriteLine("Precisamos saber qual é sua idade, para permitir ou não sua entrada:");
+
+                            var idade = int.Parse(Console.ReadLine());
+
+                            if (idade >= 18)
+                            {
+                                Console.BackgroundColor = ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Black;
+                                Console.WriteLine("Permissão concedida");
+                            }
+                            else
+                            {
+                                Console.BackgroundColor = ConsoleColor.Red;
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("Sem Permissão");
+                            }
+
+                            Console.ReadKey();
+                            Console.ReadKey(true);
+                            }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Digite apenas números");
+                        }
+                    }
+                }
+            }
+        </code>
+    </pre>
+<div>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='block'"> Mostrar Código </button>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='none'"> Esconder Código </button>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<h3>Solução Web</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdadeEntrada" class="control-label"></label>
+                <input asp-for="IdadeEntrada" class="form-control" />
+                <span asp-validation-for="IdadeEntrada" class="text-danger"></span>
+            </div>
+
+            @if (ViewBag._concedido == "Concedido")
+            {
+                <div class="form-group">
+                    <label asp-for="IdadeSaida" class="control-label"></label>
+                    <input asp-for="IdadeSaida" class="bg-success" disabled />
+                    <span asp-validation-for="IdadeSaida" class="text-danger"></span>
+                </div>
+            }
+            else if (ViewBag._concedido == "Denegrido")
+            {
+                <div class="form-group">
+                    <label asp-for="IdadeSaida" class="control-label"></label>
+                    <input asp-for="IdadeSaida" class="bg-warning" disabled />
+                    <span asp-validation-for="IdadeSaida" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+
+            }
+            <div class="form-group">
+                <input type="submit" value="Verificar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<br />
+<br />
+<br />
+<br />

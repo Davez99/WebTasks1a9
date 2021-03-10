@@ -1,0 +1,105 @@
+﻿@model WbEx1a9.Models.Ex07ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+<br />
+<br />
+
+<h1>Exercicio 7</h1>
+<br />
+<h3>Solução Console</h3>
+<hr />
+<pre id="demo" style="display:none">
+<code>
+            using System;
+
+            namespace Exercício7
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        /*
+                        Ex 7 Desenvolva um algoritmo que calcule o reajuste salarial.
+                        Se o salário for abaixo de 1.700 o ajuste é de R$300.00, se maior de R$ 200.00.
+                        Para finalizar, exiba o novo salário na tela.
+                        */
+
+                        try
+                        {
+                            Console.WriteLine("Digite o seu salário:");
+                            float salario = float.Parse(Console.ReadLine());
+                            Console.Clear();
+
+                            float v = 0f;
+
+                            if (salario >= 1.700)
+                            {
+                                v = salario + 200;
+                            }
+                            else
+                            {
+                                v = salario + 300;
+                            }
+
+                            Console.WriteLine($"O seu reajuste salarial ficou em {v}");
+
+                            Console.ReadKey();
+                            Console.ReadKey(true);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Digite apenas números");
+                        }
+                    }
+                }
+            }
+        </code>
+    </pre>
+<div>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='block'"> Mostrar Código </button>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='none'"> Esconder Código </button>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<h3>Solução Web</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SalarioUser" class="control-label"></label>
+                <input asp-for="SalarioUser" class="form-control" />
+                <span asp-validation-for="SalarioUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reajuste" class="control-label"></label>
+                <input asp-for="Reajuste" class="form-control" disabled />
+                <span asp-validation-for="Reajuste" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Calcular" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<br />
+<br />
+<br />
+<br />

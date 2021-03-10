@@ -1,0 +1,99 @@
+﻿@model WbEx1a9.Models.Ex01ViewModel
+
+@{
+    ViewData["Title"] = "Exercicio 1";
+}
+
+
+<br />
+<br />
+<br />
+<br />
+
+<h1>Exercicio 1</h1>
+<br />
+<h3>Solução Console</h3>
+<hr />
+<pre id="demo" style="display:none">
+<code>
+            ﻿using System;
+
+            namespace Exercicio1
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        
+
+                        float i, escolha;
+
+                        do
+                        {
+                            Console.WriteLine("Escreva um número");
+                            i = float.Parse(Console.ReadLine());
+
+                            if (i % 2 == 0)
+                            {
+                                Console.WriteLine("O Seu número é par");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Seu número é impar");
+                            }
+
+                            Console.WriteLine("Mais uma vez?  1 - sim 2 - não");
+                            escolha = int.Parse(Console.ReadLine());
+
+                            Console.Clear();
+
+                        } while ( escolha != 2);
+                    }
+                }
+            }
+        </code>
+    </pre>
+<div>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='block'"> Mostrar Código </button>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='none'"> Esconder Código </button>
+</div>
+
+<br />
+<br />
+<br />
+<br /> 
+
+<h3>Solução Web</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReceberNumero" class="control-label"></label>
+                <input asp-for="ReceberNumero" class="form-control" />
+                <span asp-validation-for="ReceberNumero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resposta" class="control-label"></label>
+                <input asp-for="Resposta" class="form-control" disabled />
+                <span asp-validation-for="Resposta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<br />
+<br />
+<br />
+<br />

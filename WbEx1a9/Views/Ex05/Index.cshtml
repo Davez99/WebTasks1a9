@@ -1,0 +1,95 @@
+﻿@model WbEx1a9.Models.Ex05ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<h1>Exercicio 5</h1>
+<br />
+<h3>Solução Console</h3>
+<hr />
+<pre id="demo" style="display:none">
+<code>
+            using System;
+
+            namespace Exercicio5
+            {
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        /*
+                        Ex 5 Desenvolva um método que receba por parâmetro o um nome,
+                        e retorne a frase “Olá meu nome é: { nome recebido}”.
+                        */
+
+
+                        NewMethod(NewMethod1());
+                    }
+
+                    private static void NewMethod(string nome)
+                    {
+                        Console.WriteLine("Olá meu nome é: {0}", nome);
+                        Console.ReadKey();
+                    }
+
+                    private static string NewMethod1()
+                    {
+                        Console.WriteLine("Escreva seu nome:");
+                        var nome = Console.ReadLine();
+                        Console.Clear();
+                        return nome;
+                    }
+                }
+            }
+        </code>
+    </pre>
+<div>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='block'"> Mostrar Código </button>
+    <button type="button" class="btn btn-light" onclick="document.getElementById('demo').style.display='none'"> Esconder Código </button>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<h3>Solução Web</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EntradaUser" class="control-label"></label>
+                <input asp-for="EntradaUser" class="form-control" />
+                <span asp-validation-for="EntradaUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaidaUser" class="control-label"></label>
+                <input asp-for="SaidaUser" class="form-control" disabled />
+                <span asp-validation-for="SaidaUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<br />
+<br />
+<br />
+<br />
